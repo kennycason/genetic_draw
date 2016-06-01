@@ -55,6 +55,7 @@ However, one of our Kirby's didn't evolve so well. But why? It turns out that I 
 
 <img src="output/kirby_evolved_bad_fitness_function.png?raw=true" width="128px"/>
 
+More of the output stats with numbers and graphs can be found in an excel file [here](convergence_stats.xlsx?raw=true).
 
 And finally, a current snapshot of my profile being evolved. :)
 
