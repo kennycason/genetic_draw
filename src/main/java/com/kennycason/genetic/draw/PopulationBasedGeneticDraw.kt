@@ -6,9 +6,9 @@ package com.kennycason.genetic.draw
 
 import com.kennycason.genetic.draw.gene.*
 import com.kennycason.genetic.draw.gene.mutate.PixelIncrementalMutator
-import com.kennycason.genetic.draw.gene.mutate.PolygonIncrementalMutator
 import com.kennycason.genetic.draw.gene.selection.StochasticSelector
 import com.kennycason.genetic.draw.fitness.ImageDifference
+import com.kennycason.genetic.draw.gene.mutate.PolygonIncrementalMutator
 import com.kennycason.genetic.draw.probability.DynamicRangeProbability
 import com.kennycason.genetic.draw.probability.StaticProbability
 import com.sun.javafx.iio.ImageStorage
@@ -23,23 +23,26 @@ import javax.swing.JPanel
 import javax.swing.WindowConstants
 
 fun main(args: Array<String>) {
-    DualParentGeneticDraw().run()
+    PopulationBasedGeneticDraw().run()
 }
 
-class DualParentGeneticDraw {
+class PopulationBasedGeneticDraw {
     val random = Random()
     val fileName = "profile.jpg"
     val target = ImageIO.read(Thread.currentThread().contextClassLoader.getResource(fileName))
     val context = Context(
             width = target.width,
             height = target.height,
-            geneCount = 1000,
+            geneCount = 2000,
             populationCount = 30,
-            mutationProbability = DynamicRangeProbability(0.001f, 0.05f),
-            pixelSize = -1)
+            mutationProbability = DynamicRangeProbability(0.001f, 0.01f),
+            pixelSize = 8)
+//    val mutator = PixelIncrementalMutator(context)
+//    val genetic = PixelGenetic(context)
     val mutator = PolygonIncrementalMutator(context)
-    val crossOver = CrossOver()
     val genetic = PolygonGenetic(context)
+
+    val crossOver = CrossOver()
     val fitnessFunction = ImageDifference()
     val selector = StochasticSelector()
 

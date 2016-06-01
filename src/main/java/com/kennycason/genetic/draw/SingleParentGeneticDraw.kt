@@ -8,6 +8,7 @@ import com.kennycason.genetic.draw.gene.*
 import com.kennycason.genetic.draw.gene.mutate.PixelIncrementalMutator
 import com.kennycason.genetic.draw.gene.mutate.PolygonIncrementalMutator
 import com.kennycason.genetic.draw.fitness.ImageDifference
+import com.kennycason.genetic.draw.probability.DynamicRangeProbability
 import com.kennycason.genetic.draw.probability.StaticProbability
 import com.sun.javafx.iio.ImageStorage
 import java.awt.Color
@@ -32,11 +33,14 @@ class SingleParentGeneticDraw {
             height = target.height,
             geneCount = 1000,
             populationCount = -1,
-            mutationProbability = StaticProbability(0.05f),
-            pixelSize = -1)
-    val mutator = PolygonIncrementalMutator(context)
-    val polygonGenetic = PolygonGenetic(context)
-    val genetic = Genetic(context)
+            mutationProbability = DynamicRangeProbability(0.001f, 0.05f),
+            pixelSize = 8)
+//    val mutator = PolygonIncrementalMutator(context)
+//    val genetic = PolygonGenetic(context)
+    val mutator = PixelIncrementalMutator(context)
+    val genetic = PixelGenetic(context)
+    val commonGenetic = Genetic(context)
+
     val fitnessFunction = ImageDifference()
 
     val canvas: BufferedImage = BufferedImage(context.width, context.height, BufferedImage.TYPE_INT_ARGB)
@@ -50,13 +54,13 @@ class SingleParentGeneticDraw {
         frame.setSize(context.width, context.height + 18)
         frame.setVisible(true)
         
-        var mostFit = polygonGenetic.newIndividual()
+        var mostFit = genetic.newIndividual()
         var mostFitScore = Double.MAX_VALUE
 
         val panel = object: JPanel() {
             override fun paintComponent(g: Graphics) {
                 super.paintComponent(g)
-                polygonGenetic.expressDna(mostFitCanvasGraphics, mostFit)
+                genetic.expressDna(mostFitCanvasGraphics, mostFit)
                 g.drawImage(mostFitCanvas, 0, 0, context.width, context.height, this)
             }
         };
@@ -71,12 +75,12 @@ class SingleParentGeneticDraw {
             // evaluate fitness
             canvasGraphics.color = Color.BLACK
             canvasGraphics.clearRect(0, 0, context.width, context.height)
-            polygonGenetic.expressDna(canvasGraphics, child)
+            genetic.expressDna(canvasGraphics, child)
             val fitness = fitnessFunction.compare(canvas, target)
 
             if (fitness <= mostFitScore) {
                 println("$i, $fitness")
-                mostFit = genetic.copy(child)
+                mostFit = commonGenetic.copy(child)
                 mostFitScore = fitness
             }
             panel.repaint() // must redraw as that's what actually draws to the canvas
