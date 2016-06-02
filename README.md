@@ -14,7 +14,7 @@ Draw Images via genetic programming.
 - Static or Dynamic mutation probability rates.
 - Extendable Mutation/Selection classes
 
-Two versions of Bulbasaur partially evolved. Used sexual reproduction via two parents. Population used stochastic acceptence with elitism to generate next populations.
+Two versions of Bulbasaur partially evolved. Used sexual reproduction via two parents. Population used stochastic acceptance with elitism to generate next populations.
 
 <img src="output/bulbasaur_evolved_polygon.png?raw=true"/>
 <img src="output/bulbasaur_evolved_polygon.png?raw=true"/>
@@ -23,6 +23,10 @@ Two GIFs showing the evolution of a square.
 
 <img src="output/square_evolution.gif?raw=true"/>
 <img src="output/square_evolution2.gif?raw=true"/>
+
+GIF showing the evolution of the DataRank whale logo.
+
+<img src="output/datarank_whale_evolved.gif?raw=true"/>
 
 Evolutions of Mario. The first is using a polygon rendering DNA. The second and third are using DNAs that render fixed position/sized pixels of size 4x4px and 8x8px. 
 
