@@ -48,6 +48,9 @@ class SingleParentGeneticDraw {
     val mostFitCanvas: BufferedImage = BufferedImage(context.width, context.height, BufferedImage.TYPE_INT_ARGB)
     val mostFitCanvasGraphics = mostFitCanvas.graphics
 
+    val saveOutput = false
+    val saveOutputFrequency = 25
+
     fun run() {
         val frame = JFrame()
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE)
@@ -57,18 +60,21 @@ class SingleParentGeneticDraw {
         var mostFit = genetic.newIndividual()
         var mostFitScore = Double.MAX_VALUE
 
+        var i = 0
         val panel = object: JPanel() {
             override fun paintComponent(g: Graphics) {
                 super.paintComponent(g)
                 genetic.expressDna(mostFitCanvasGraphics, mostFit)
                 g.drawImage(mostFitCanvas, 0, 0, context.width, context.height, this)
+
+                if (saveOutput && (i % saveOutputFrequency == 0)) {
+                    ImageIO.write(mostFitCanvas, "png", File("/tmp/evolved_$i.png"))
+                }
             }
         };
         frame.add(panel)
         panel.revalidate()
 
-        println("sanity test (should = 0) " + fitnessFunction.compare(target, target))
-        var i = 0
         do {
             val child = mutator.mutate(mostFit, context.mutationProbability.next())
 

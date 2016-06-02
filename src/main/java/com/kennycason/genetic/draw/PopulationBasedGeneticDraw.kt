@@ -9,6 +9,8 @@ import com.kennycason.genetic.draw.gene.mutate.PixelIncrementalMutator
 import com.kennycason.genetic.draw.gene.selection.StochasticSelector
 import com.kennycason.genetic.draw.fitness.ImageDifference
 import com.kennycason.genetic.draw.gene.mutate.PolygonIncrementalMutator
+import com.kennycason.genetic.draw.gene.mutate.PolygonLargeIncrementalMutator
+import com.kennycason.genetic.draw.gene.mutate.PolygonNewGeneMutator
 import com.kennycason.genetic.draw.probability.DynamicRangeProbability
 import com.kennycason.genetic.draw.probability.StaticProbability
 import com.sun.javafx.iio.ImageStorage
@@ -28,7 +30,7 @@ fun main(args: Array<String>) {
 
 class PopulationBasedGeneticDraw {
     val random = Random()
-    val fileName = "datarank.png"
+    val fileName = "bulbasaur.bmp"
     val target = ImageIO.read(Thread.currentThread().contextClassLoader.getResource(fileName))
     val context = Context(
             width = target.width,
@@ -37,9 +39,11 @@ class PopulationBasedGeneticDraw {
             populationCount = 20,
             mutationProbability = DynamicRangeProbability(0.001f, 0.01f),
             pixelSize = 8)
-//    val mutator = PixelIncrementalMutator(context)
-//    val genetic = PixelGenetic(context)
+    //val mutator = PixelIncrementalMutator(context)
+    //val genetic = PixelGenetic(context)
     val mutator = PolygonIncrementalMutator(context)
+    //val mutator = PolygonNewGeneMutator(context)
+    //val mutator = PolygonLargeIncrementalMutator(context)
     val genetic = PolygonGenetic(context)
 
     val crossOver = CrossOver()
@@ -51,29 +55,31 @@ class PopulationBasedGeneticDraw {
     val mostFitCanvas: BufferedImage = BufferedImage(context.width, context.height, BufferedImage.TYPE_INT_ARGB)
     val mostFitCanvasGraphics = mostFitCanvas.graphics
 
+    val saveOutput = true
+    val saveOutputFrequency = 25
+
     fun run() {
         val frame = JFrame()
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE)
         frame.setSize(target.width, target.height)
         frame.setVisible(true)
 
-        var j = 0
+        var i = 0
         var population = genetic.newPopulation()
         val panel = object: JPanel() {
             override fun paintComponent(g: Graphics) {
                 super.paintComponent(g)
                 genetic.expressDna(mostFitCanvasGraphics, population.first())
                 g.drawImage(mostFitCanvas, 0, 0, context.width, context.height, this)
-                if (j % 25 == 0) {
-                    ImageIO.write(mostFitCanvas, "png", File("/tmp/evolved_$j.png"))
+
+                if (saveOutput && (i % saveOutputFrequency == 0)) {
+                    ImageIO.write(mostFitCanvas, "png", File("/tmp/evolved_$i.png"))
                 }
-                j++
             }
         };
         frame.add(panel)
         panel.revalidate()
 
-        var i = 0
         do {
             population = evaluateFitness(canvasGraphics, population)
             println("${i}, ${population.first().fitness}")
