@@ -67,7 +67,7 @@ And finally, a current snapshot of my profile being evolved. :)
 
 And previous versions.
 
-<img src="output/my_profile_evolved3.png" width="250px"/>
-<img src="output/my_profile_evolved2.png" width="250px"/>
-<img src="output/my_profile_evolved1.png" width="250px"/>
-<img src="output/my_profile_evolved0.png" width="250px"/>
+<img src="output/my_profile_evolved3.png" width="300px"/>
+<img src="output/my_profile_evolved2.png" width="300px"/>
+<img src="output/my_profile_evolved1.png" width="300px"/>
+<img src="output/my_profile_evolved0.png" width="300px"/>
