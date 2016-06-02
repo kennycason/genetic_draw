@@ -63,11 +63,11 @@ More of the output stats with numbers and graphs can be found in an excel file [
 
 And finally, a current snapshot of my profile being evolved. :)
 
-<img src="output/genetic_draw/my_profile_evolved4.png" width="400px"/>
+<img src="output/my_profile_evolved4.png" width="400px"/>
 
 And previous versions.
 
-<img src="output/genetic_draw/my_profile_evolved3.png" width="250px"/>
-<img src="output/genetic_draw/my_profile_evolved2.png" width="250px"/>
-<img src="output/genetic_draw/my_profile_evolved1.png" width="250px"/>
-<img src="output/genetic_draw/my_profile_evolved0.png" width="250px"/>
+<img src="output/my_profile_evolved3.png" width="250px"/>
+<img src="output/my_profile_evolved2.png" width="250px"/>
+<img src="output/my_profile_evolved1.png" width="250px"/>
+<img src="output/my_profile_evolved0.png" width="250px"/>
