@@ -38,7 +38,7 @@ Evolution of Yoshi with convergence rate.
 
 <img src="output/evolving_yoshi_with_stats.png?raw=true" width="600px"/>
 
-Mutation Rates and their affect on learning. Not normalized to generation count, you'll have to do some manual comparing. As expected, 10% performs better than 1% and 50%. I did not try a large number of intermittent values. (Note the generation count to see the faster convergence.)
+Mutation Rates and their effect on learning. Not normalized to generation count, you'll have to do some manual comparing. As expected, 10% performs better than 1% and 50%. I did not try a large number of intermittent values. (Note the generation count to see the faster convergence.)
 
 <img src="output/single_parent_mutation_1_percent.png?raw=true" width="400px"/>
 
