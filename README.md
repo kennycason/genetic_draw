@@ -59,4 +59,4 @@ More of the output stats with numbers and graphs can be found in an excel file [
 
 And finally, a current snapshot of my profile being evolved. :)
 
-<img src="output/my_profile_evolved.png?raw=true" width="400px"/>
+<img src="output/my_profile_evolved2.png?raw=true" width="400px"/>
