@@ -41,7 +41,7 @@ class SingleParentGeneticDraw {
     val genetic = PixelGenetic(context)
     val commonGenetic = Genetic(context)
 
-    val fitnessFunction = ImageDifference()
+    val fitnessFunction = ImageDifference(1)
 
     val canvas: BufferedImage = BufferedImage(context.width, context.height, BufferedImage.TYPE_INT_ARGB)
     val canvasGraphics = canvas.graphics

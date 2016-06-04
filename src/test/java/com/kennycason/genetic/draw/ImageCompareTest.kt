@@ -11,7 +11,7 @@ import kotlin.test.assertEquals
  * Created by kenny on 5/23/16.
  */
 class ImageCompareTest {
-    val fitnessFunction = ImageDifference()
+    val fitnessFunction = ImageDifference(1)
 
     @Test
     fun rgbLogic() {

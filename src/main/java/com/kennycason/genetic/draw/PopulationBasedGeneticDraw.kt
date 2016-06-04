@@ -30,24 +30,24 @@ fun main(args: Array<String>) {
 
 class PopulationBasedGeneticDraw {
     val random = Random()
-    val fileName = "bulbasaur.bmp"
+    val fileName = "sm-logo.png"
     val target = ImageIO.read(Thread.currentThread().contextClassLoader.getResource(fileName))
     val context = Context(
             width = target.width,
             height = target.height,
-            geneCount = 2000,
-            populationCount = 20,
+            geneCount = 1000,
+            populationCount = 30,
             mutationProbability = DynamicRangeProbability(0.001f, 0.01f),
             pixelSize = 8)
     //val mutator = PixelIncrementalMutator(context)
     //val genetic = PixelGenetic(context)
-    val mutator = PolygonIncrementalMutator(context)
+    //val mutator = PolygonIncrementalMutator(context)
     //val mutator = PolygonNewGeneMutator(context)
-    //val mutator = PolygonLargeIncrementalMutator(context)
+    val mutator = PolygonLargeIncrementalMutator(context)
     val genetic = PolygonGenetic(context)
 
     val crossOver = CrossOver()
-    val fitnessFunction = ImageDifference()
+    val fitnessFunction = ImageDifference(2)
     val selector = StochasticSelector()
 
     val canvas: BufferedImage = BufferedImage(context.width, context.height, BufferedImage.TYPE_INT_ARGB)
@@ -55,7 +55,7 @@ class PopulationBasedGeneticDraw {
     val mostFitCanvas: BufferedImage = BufferedImage(context.width, context.height, BufferedImage.TYPE_INT_ARGB)
     val mostFitCanvasGraphics = mostFitCanvas.graphics
 
-    val saveOutput = true
+    val saveOutput = false
     val saveOutputFrequency = 25
 
     fun run() {
