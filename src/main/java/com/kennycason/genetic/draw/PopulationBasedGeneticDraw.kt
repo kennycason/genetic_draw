@@ -5,17 +5,19 @@ package com.kennycason.genetic.draw
  */
 
 import com.kennycason.genetic.draw.gene.*
-import com.kennycason.genetic.draw.gene.mutate.PixelIncrementalMutator
 import com.kennycason.genetic.draw.gene.selection.StochasticSelector
 import com.kennycason.genetic.draw.fitness.ImageDifference
-import com.kennycason.genetic.draw.gene.mutate.PolygonIncrementalMutator
-import com.kennycason.genetic.draw.gene.mutate.PolygonLargeIncrementalMutator
-import com.kennycason.genetic.draw.gene.mutate.PolygonNewGeneMutator
+import com.kennycason.genetic.draw.fitness.PriorityRegionImageDifference
+import com.kennycason.genetic.draw.gene.mutate.IncrementalMutator
+import com.kennycason.genetic.draw.gene.mutate.NewGeneMutator
+import com.kennycason.genetic.draw.gene.selection.TournamentSelector
+import com.kennycason.genetic.draw.gene.shape.ShapeType
 import com.kennycason.genetic.draw.probability.DynamicRangeProbability
 import com.kennycason.genetic.draw.probability.StaticProbability
 import com.sun.javafx.iio.ImageStorage
 import java.awt.Color
 import java.awt.Graphics
+import java.awt.Rectangle
 import java.awt.image.BufferedImage
 import java.io.File
 import java.util.*
@@ -30,24 +32,24 @@ fun main(args: Array<String>) {
 
 class PopulationBasedGeneticDraw {
     val random = Random()
-    val fileName = "sm-logo.png"
+    val fileName = "mario2.png"
     val target = ImageIO.read(Thread.currentThread().contextClassLoader.getResource(fileName))
     val context = Context(
             width = target.width,
             height = target.height,
-            geneCount = 1000,
-            populationCount = 30,
-            mutationProbability = DynamicRangeProbability(0.001f, 0.01f),
-            pixelSize = 8)
-    //val mutator = PixelIncrementalMutator(context)
-    //val genetic = PixelGenetic(context)
-    //val mutator = PolygonIncrementalMutator(context)
-    //val mutator = PolygonNewGeneMutator(context)
-    val mutator = PolygonLargeIncrementalMutator(context)
-    val genetic = PolygonGenetic(context)
+            geneCount = 500,
+            populationCount = 15,
+            mutationProbability = DynamicRangeProbability(0.001f, 0.03f),
+            allowedShapes = arrayOf(/*ShapeType.POLYGON,*/ /*ShapeType.RECTANGLE, ShapeType.ELLIPSE*/ ShapeType.PIXEL),
+            maxPolygonSize = 3)
+
+    val mutator = IncrementalMutator(context)
+    val genetic = Genetic(context)
 
     val crossOver = CrossOver()
-    val fitnessFunction = ImageDifference(2)
+    //val fitnessFunction = ImageDifference(2)
+    //val fitnessFunction = PriorityRegionImageDifference(2, Rectangle(115, 125, 30, 200), 10.0) // space needle, evolve needle
+    val fitnessFunction = PriorityRegionImageDifference(2, Rectangle(0, 230, 150, 303), 100.0) // mario evolve head
     val selector = StochasticSelector()
 
     val canvas: BufferedImage = BufferedImage(context.width, context.height, BufferedImage.TYPE_INT_ARGB)

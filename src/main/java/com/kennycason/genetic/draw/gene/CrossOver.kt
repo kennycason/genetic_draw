@@ -1,6 +1,7 @@
 package com.kennycason.genetic.draw.gene
 
 import com.kennycason.genetic.draw.gene.mutate.Mutator
+import com.kennycason.genetic.draw.gene.shape.Shape
 import java.util.*
 
 /**
@@ -12,7 +13,7 @@ class CrossOver {
     // probability 1-100
     fun perform(pair: Pair<Individual, Individual>, mutator: Mutator, mutationProbability: Float) : Individual {
         val dnaLength = pair.first.dna.size
-        val genes = mutableListOf<Gene>()
+        val genes = mutableListOf<Shape>()
         (0..dnaLength-1).forEach { i ->
             if (random.nextDouble() > .5) {
                 genes.add(mutator.mutate(pair.first.dna.get(i), mutationProbability))

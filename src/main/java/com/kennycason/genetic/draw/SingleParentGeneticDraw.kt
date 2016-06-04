@@ -5,14 +5,16 @@ package com.kennycason.genetic.draw
  */
 
 import com.kennycason.genetic.draw.gene.*
-import com.kennycason.genetic.draw.gene.mutate.PixelIncrementalMutator
-import com.kennycason.genetic.draw.gene.mutate.PolygonIncrementalMutator
+import com.kennycason.genetic.draw.gene.mutate.IncrementalMutator
 import com.kennycason.genetic.draw.fitness.ImageDifference
+import com.kennycason.genetic.draw.fitness.PriorityRegionImageDifference
+import com.kennycason.genetic.draw.gene.shape.ShapeType
 import com.kennycason.genetic.draw.probability.DynamicRangeProbability
 import com.kennycason.genetic.draw.probability.StaticProbability
 import com.sun.javafx.iio.ImageStorage
 import java.awt.Color
 import java.awt.Graphics
+import java.awt.Rectangle
 import java.awt.image.BufferedImage
 import java.io.File
 import java.util.*
@@ -31,17 +33,16 @@ class SingleParentGeneticDraw {
     val context = Context(
             width = target.width,
             height = target.height,
-            geneCount = 1000,
-            populationCount = -1,
-            mutationProbability = DynamicRangeProbability(0.001f, 0.05f),
-            pixelSize = 8)
-//    val mutator = PolygonIncrementalMutator(context)
-//    val genetic = PolygonGenetic(context)
-    val mutator = PixelIncrementalMutator(context)
-    val genetic = PixelGenetic(context)
-    val commonGenetic = Genetic(context)
+            geneCount = 256,
+            mutationProbability = DynamicRangeProbability(0.001f, 0.02f),
+            allowedShapes = arrayOf(/*ShapeType.POLYGON,*/ /*ShapeType.RECTANGLE, ShapeType.ELLIPSE*/ ShapeType.PIXEL),
+            maxPolygonSize = 3)
 
-    val fitnessFunction = ImageDifference(1)
+    val mutator = IncrementalMutator(context)
+    val genetic = Genetic(context)
+
+    val crossOver = CrossOver()
+    val fitnessFunction = ImageDifference(2)
 
     val canvas: BufferedImage = BufferedImage(context.width, context.height, BufferedImage.TYPE_INT_ARGB)
     val canvasGraphics = canvas.graphics
@@ -56,7 +57,7 @@ class SingleParentGeneticDraw {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE)
         frame.setSize(context.width, context.height + 18)
         frame.setVisible(true)
-        
+
         var mostFit = genetic.newIndividual()
         var mostFitScore = Double.MAX_VALUE
 
@@ -86,7 +87,7 @@ class SingleParentGeneticDraw {
 
             if (fitness <= mostFitScore) {
                 println("$i, $fitness")
-                mostFit = commonGenetic.copy(child)
+                mostFit = child.copy()
                 mostFitScore = fitness
             }
             panel.repaint() // must redraw as that's what actually draws to the canvas
