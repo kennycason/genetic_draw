@@ -9,9 +9,7 @@ Draw Images via genetic programming.
 - Two Parent Population Models (Sexual reproduction)
 - Stochastic Selection (Selecting, with decreasing probability, less fit mates)
 - Tournament Selection (Select most fit from a random sub-population)
-- Polygon Expressing DNA
-- Pixel Expressing DNA
-- Static or Dynamic mutation probability rates.
+- Static or Dynamic mutation probability rates
 - Extendable Mutation/Selection classes
 - DNA can be comprised of many shapes, including polygons (Size N), squares, rectangles, ellipses, circles, and pixels.
 
