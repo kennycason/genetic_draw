@@ -15,4 +15,5 @@ data class Context(val width: Int,
                    val mutationProbability: Probability = StaticProbability(0.01f),
                    val allowedShapes: Array<ShapeType> = arrayOf(ShapeType.ELLIPSE, ShapeType.RECTANGLE),
                    val maxPolygonSize: Int = 5,
-                   val pixelSize: Int = 8)
+                   val pixelSize: Int = 8,
+                   val useAlpha: Boolean = true)

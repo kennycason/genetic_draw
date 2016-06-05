@@ -32,14 +32,14 @@ class Genetic(val context: Context) {
         g.color = Color.BLACK
         g.clearRect(0, 0, context.width, context.height)
         individual.dna.forEach { gene ->
-            gene.draw(g)
+            gene.draw(g, context)
         }
     }
 
     fun copy(individual: Individual) : Individual {
         val copied = mutableListOf<Shape>()
         individual.dna.forEach { gene ->
-            copied.add(gene)
+            copied.add(gene.copy())
         }
         return Individual(copied, individual.fitness)
     }

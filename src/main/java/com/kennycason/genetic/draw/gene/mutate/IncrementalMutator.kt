@@ -25,16 +25,15 @@ class IncrementalMutator(val context: Context) : Mutator {
     val maxPixelHeight = context.height / context.pixelSize
 
     override fun mutate(gene: Shape, probability: Float): Shape {
-        val copy = gene.copy()
         // don't mutate
-        if (random.nextDouble() > probability) { return copy }
+        if (random.nextDouble() > probability) { return gene }
 
-        when (copy.type) {
-            ShapeType.RECTANGLE -> return mutateRectangle(copy as Rectangle)
-            ShapeType.ELLIPSE -> return mutateEllipse(copy as Ellipse)
-            ShapeType.POLYGON -> return mutatePolygon(copy as Polygon)
-            ShapeType.PIXEL -> return mutatePixel(copy as Pixel)
-            ShapeType.CIRCLE -> return mutateCircle(copy as Circle)
+        when (gene.type) {
+            ShapeType.RECTANGLE -> return mutateRectangle(gene as Rectangle)
+            ShapeType.ELLIPSE -> return mutateEllipse(gene as Ellipse)
+            ShapeType.POLYGON -> return mutatePolygon(gene as Polygon)
+            ShapeType.PIXEL -> return mutatePixel(gene as Pixel)
+            ShapeType.CIRCLE -> return mutateCircle(gene as Circle)
         }
     }
 

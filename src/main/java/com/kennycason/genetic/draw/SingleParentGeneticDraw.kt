@@ -36,7 +36,9 @@ class SingleParentGeneticDraw {
             geneCount = 256,
             mutationProbability = DynamicRangeProbability(0.001f, 0.02f),
             allowedShapes = arrayOf(/*ShapeType.POLYGON,*/ /*ShapeType.RECTANGLE, ShapeType.ELLIPSE*/ ShapeType.PIXEL),
-            maxPolygonSize = 3)
+            maxPolygonSize = 3,
+            pixelSize = 8,
+            useAlpha = true)
 
     val mutator = IncrementalMutator(context)
     val genetic = Genetic(context)
@@ -49,7 +51,7 @@ class SingleParentGeneticDraw {
     val mostFitCanvas: BufferedImage = BufferedImage(context.width, context.height, BufferedImage.TYPE_INT_ARGB)
     val mostFitCanvasGraphics = mostFitCanvas.graphics
 
-    val saveOutput = false
+    val saveOutput = true
     val saveOutputFrequency = 25
 
     fun run() {
@@ -77,7 +79,7 @@ class SingleParentGeneticDraw {
         panel.revalidate()
 
         do {
-            val child = mutator.mutate(mostFit, context.mutationProbability.next())
+            val child = mutator.mutate(genetic.copy(mostFit), context.mutationProbability.next())
 
             // evaluate fitness
             canvasGraphics.color = Color.BLACK
@@ -87,7 +89,7 @@ class SingleParentGeneticDraw {
 
             if (fitness <= mostFitScore) {
                 println("$i, $fitness")
-                mostFit = child.copy()
+                mostFit = child
                 mostFitScore = fitness
             }
             panel.repaint() // must redraw as that's what actually draws to the canvas

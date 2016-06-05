@@ -16,9 +16,9 @@ class CrossOver {
         val genes = mutableListOf<Shape>()
         (0..dnaLength-1).forEach { i ->
             if (random.nextDouble() > .5) {
-                genes.add(mutator.mutate(pair.first.dna.get(i), mutationProbability))
+                genes.add(mutator.mutate(pair.first.dna.get(i).copy(), mutationProbability))
             } else {
-                genes.add(mutator.mutate(pair.second.dna.get(i), mutationProbability))
+                genes.add(mutator.mutate(pair.second.dna.get(i).copy(), mutationProbability))
             }
         }
         return Individual(genes, Double.MAX_VALUE)

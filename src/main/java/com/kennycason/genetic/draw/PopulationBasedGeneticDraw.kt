@@ -15,9 +15,7 @@ import com.kennycason.genetic.draw.gene.shape.ShapeType
 import com.kennycason.genetic.draw.probability.DynamicRangeProbability
 import com.kennycason.genetic.draw.probability.StaticProbability
 import com.sun.javafx.iio.ImageStorage
-import java.awt.Color
-import java.awt.Graphics
-import java.awt.Rectangle
+import java.awt.*
 import java.awt.image.BufferedImage
 import java.io.File
 import java.util.*
@@ -32,24 +30,23 @@ fun main(args: Array<String>) {
 
 class PopulationBasedGeneticDraw {
     val random = Random()
-    val fileName = "mario2.png"
+    val fileName = "jing.jpg"
     val target = ImageIO.read(Thread.currentThread().contextClassLoader.getResource(fileName))
     val context = Context(
             width = target.width,
             height = target.height,
-            geneCount = 500,
-            populationCount = 15,
-            mutationProbability = DynamicRangeProbability(0.001f, 0.03f),
-            allowedShapes = arrayOf(/*ShapeType.POLYGON,*/ /*ShapeType.RECTANGLE, ShapeType.ELLIPSE*/ ShapeType.PIXEL),
-            maxPolygonSize = 3)
+            geneCount = 2000,
+            populationCount = 20,
+            mutationProbability = DynamicRangeProbability(0.001f, 0.01f),
+            allowedShapes = arrayOf(/*ShapeType.POLYGON,*/ ShapeType.RECTANGLE, ShapeType.ELLIPSE/*, ShapeType.PIXEL*/),
+            maxPolygonSize = 3,
+            useAlpha = true)
 
     val mutator = IncrementalMutator(context)
     val genetic = Genetic(context)
-
     val crossOver = CrossOver()
-    //val fitnessFunction = ImageDifference(2)
-    //val fitnessFunction = PriorityRegionImageDifference(2, Rectangle(115, 125, 30, 200), 10.0) // space needle, evolve needle
-    val fitnessFunction = PriorityRegionImageDifference(2, Rectangle(0, 230, 150, 303), 100.0) // mario evolve head
+    val fitnessFunction = ImageDifference(2)
+    //val fitnessFunction = PriorityRegionImageDifference(2, Rectangle(0, 230, 150, 303), 100.0) // mario evolve head
     val selector = StochasticSelector()
 
     val canvas: BufferedImage = BufferedImage(context.width, context.height, BufferedImage.TYPE_INT_ARGB)
