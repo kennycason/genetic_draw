@@ -13,6 +13,7 @@ Draw Images via genetic programming.
 - Pixel Expressing DNA
 - Static or Dynamic mutation probability rates.
 - Extendable Mutation/Selection classes
+- DNA can be comprised of many shapes, including polygons (Size N), squares, rectangles, ellipses, circles, and pixels.
 
 Two versions of Bulbasaur partially evolved. Used sexual reproduction via two parents. Population used stochastic acceptance with elitism to generate next populations.
 
@@ -24,9 +25,10 @@ Two GIFs showing the evolution of a square.
 <img src="output/square_evolution.gif?raw=true"/>
 <img src="output/square_evolution2.gif?raw=true"/>
 
-GIF showing the evolution of the DataRank whale logo.
+GIF showing the evolution of the DataRank and Simply Measured logos.
 
 <img src="output/datarank_whale_evolved.gif?raw=true"/>
+<img src="output/sm_logo_evolved.gif?raw=true" height="125px"/>
 
 Evolutions of Mario. The first is using a polygon rendering DNA. The second and third are using DNAs that render fixed position/sized pixels of size 4x4px and 8x8px. 
 
@@ -59,7 +61,18 @@ However, one of our Kirby's didn't evolve so well. But why? It turns out that I 
 
 <img src="output/kirby_evolved_bad_fitness_function.png?raw=true" width="128px"/>
 
-More of the output stats with numbers and graphs can be found in an excel file [here](convergence_stats.xlsx?raw=true).
+Adding alpha channels to the polygons results in a considerable performance drop (about 7x). While adding alpha results in better results, there are options to remove the alpha channel. Below are two renderings, with alpha and without.
+
+<img src="output/jing_evolved.png?raw=true" width="300px"/>
+<img src="output/jing_evolved_no_alpha.png?raw=true" width="300px"/>
+
+The canonical examples I found on the internet seem to be the evolution of Mona Lisa. Most examples I found demonstrated using triangles. I found that I had better results by mixing many shapes together. On the left is Mona Lisa evolved using rectangles and ellipses. Below, the first two evolutions demonstrate 1000 and 2000 genes containing only rectangles and ellipses, and the third using only triangles.
+
+<img src="output/mona_lisa_evolved_1000_genes.png?raw=true" width="250px"/>
+<img src="output/mona_lisa_evolved_2000_genes.png?raw=true" width="250px"/>
+<img src="output/mona_lisa_evolved_polygon.png?raw=true" width="250px"/>
+
+More of the statistics and graphs can be found in an excel file [here](convergence_stats.xlsx?raw=true).
 
 And finally, a current snapshot of my profile being evolved. :)
 
