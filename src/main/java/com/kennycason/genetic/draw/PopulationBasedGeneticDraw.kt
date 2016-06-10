@@ -35,7 +35,7 @@ class PopulationBasedGeneticDraw {
     val context = Context(
             width = target.width,
             height = target.height,
-            geneCount = 2000,
+            geneCount = 2500,
             populationCount = 20,
             mutationProbability = DynamicRangeProbability(0.001f, 0.01f),
             allowedShapes = arrayOf(/*ShapeType.POLYGON,*/ ShapeType.RECTANGLE, ShapeType.ELLIPSE/*, ShapeType.PIXEL*/),
@@ -54,7 +54,7 @@ class PopulationBasedGeneticDraw {
     val mostFitCanvas: BufferedImage = BufferedImage(context.width, context.height, BufferedImage.TYPE_INT_ARGB)
     val mostFitCanvasGraphics = mostFitCanvas.graphics
 
-    val saveOutput = false
+    val saveOutput = true
     val saveOutputFrequency = 25
 
     fun run() {
