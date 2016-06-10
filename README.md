@@ -3,16 +3,6 @@ Genetic Draw
 
 Draw Images via genetic programming.
 
-### Includes
-
-- Single Parent Models (Asexual reproduction)
-- Two Parent Population Models (Sexual reproduction)
-- Stochastic Selection (Selecting, with decreasing probability, less fit mates)
-- Tournament Selection (Select most fit from a random sub-population)
-- Static or Dynamic mutation probability rates
-- Extendable Mutation/Selection classes
-- DNA can be comprised of many shapes, including polygons (Size N), squares, rectangles, ellipses, circles, and pixels.
-
 ### The Algorithms
 
 There are two algorithms used in Genetic Draw. Both algorithms demonstrate the use of Genetic Programing to evolve an image from DNA(s). 
@@ -33,11 +23,11 @@ When a specific DNA is "expressed" I iterate over each of the genes and render t
 
 1. Randomly generate a population of DNAs.
 2. Measure the fitness of all of the DNAs and sort them by fitness.
-3a. Optionally, allowing elitism, select the most fit to succeed to the next generation. 
-3b. Optionally, kill off the bottom x% (lowest fitness) of the population.
-3c. Using tournament selection or stochastic acceptance determine which remaining DNAs should reproduce to make the next generation of DNAs. Reproduce enough children to repopulate the next generation.
-4. After selecting which DNAs to reproduce, via crossover, select 50% of the genes from each parent, apply random mutations to generate children DNAs. The children now become the current population.
-5. Repeat form step 2.
+3. Optionally, allowing elitism, select the most fit to succeed to the next generation. 
+4. Optionally, kill off the bottom x% (lowest fitness) of the population.
+5. Using tournament selection or stochastic acceptance determine which remaining DNAs should reproduce to make the next generation of DNAs. Reproduce enough children to repopulate the next generation.
+6. After selecting which DNAs to reproduce, via crossover, select 50% of the genes from each parent, apply random mutations to generate children DNAs. The children now become the current population.
+7. Repeat form step 2.
 
 ### Select Renderings & Stats
 
@@ -66,6 +56,18 @@ Evolution of Yoshi with convergence rate.
 
 <img src="output/evolving_yoshi_with_stats.png?raw=true" width="600px"/>
 
+Adding alpha channels to the polygons results in a considerable performance drop (about 7x). While adding alpha results in better results, there are options to remove the alpha channel. Below are three renderings, the first two use alpha (left 2500 genes, middle 2000 genes), and the right image demonstrates no transparency.
+
+<img src="output/jing_evolved_2500_genes.png?raw=true" width="250px"/>
+<img src="output/jing_evolved.png?raw=true" width="250px"/>
+<img src="output/jing_evolved_no_alpha.png?raw=true" width="250px"/>
+
+The canonical examples I found on the internet seem to be the evolution of Mona Lisa. Most examples I found demonstrated using triangles. I found that I had better results by mixing many shapes together. On the left is Mona Lisa evolved using rectangles and ellipses. Below, the first two evolutions demonstrate 1000 and 2000 genes containing only rectangles and ellipses, and the third using only triangles.
+
+<img src="output/mona_lisa_evolved_1000_genes.png?raw=true" width="250px"/>
+<img src="output/mona_lisa_evolved_2000_genes.png?raw=true" width="250px"/>
+<img src="output/mona_lisa_evolved_polygon.png?raw=true" width="250px"/>
+
 Mutation Rates and their effect on learning. Not normalized to generation count, you'll have to do some manual comparing. As expected, 10% performs better than 1% and 50%. I did not try a large number of intermittent values. (Note the generation count to see the faster convergence.)
 
 <img src="output/single_parent_mutation_1_percent.png?raw=true" width="400px"/>
@@ -80,24 +82,12 @@ On the topic of mutation, a low mutation rate means that the image converges slo
 
 Our good friend Kirby, evolved using both pixel and polygon rendering DNAs.
 
-<img src="output/kirby_evolved_pixel4.png?raw=true" width="128px"/>
-<img src="output/kirby_evolved_polygon.png?raw=true" width="128px"/>
+<img src="output/kirby_evolved_pixel4.png?raw=true" height="128px"/>
+<img src="output/kirby_evolved_polygon.png?raw=true" height="128px"/>
 
 However, one of our Kirby's didn't evolve so well. But why? It turns out that I had a bad fitness function. Specifically my fitness function compared the raw difference between raw RGB integer values between the evolved and target images. That is red is encoded in higher bits than green, and green higher than blue. This means that a difference between reds is significantly larger than differences between greens or blue and thus the genetic algorithm will perceive improvements of red being more important than blue. In other words, I introduced a bias in the fitness function. The result was random blue blotches in many of the renderings.
 
 <img src="output/kirby_evolved_bad_fitness_function.png?raw=true" width="128px"/>
-
-Adding alpha channels to the polygons results in a considerable performance drop (about 7x). While adding alpha results in better results, there are options to remove the alpha channel. Below are three renderings, the first two use alpha (left 2500 genes, middle 2000 genes), and the right image demonstrates no transparency.
-
-<img src="output/jing_evolved_2500_genes.png?raw=true" width="250px"/>
-<img src="output/jing_evolved.png?raw=true" width="250px"/>
-<img src="output/jing_evolved_no_alpha.png?raw=true" width="250px"/>
-
-The canonical examples I found on the internet seem to be the evolution of Mona Lisa. Most examples I found demonstrated using triangles. I found that I had better results by mixing many shapes together. On the left is Mona Lisa evolved using rectangles and ellipses. Below, the first two evolutions demonstrate 1000 and 2000 genes containing only rectangles and ellipses, and the third using only triangles.
-
-<img src="output/mona_lisa_evolved_1000_genes.png?raw=true" width="250px"/>
-<img src="output/mona_lisa_evolved_2000_genes.png?raw=true" width="250px"/>
-<img src="output/mona_lisa_evolved_polygon.png?raw=true" width="250px"/>
 
 More of the statistics and graphs can be found in an excel file [here](convergence_stats.xlsx?raw=true).
 
