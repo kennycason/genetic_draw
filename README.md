@@ -39,7 +39,7 @@ When a specific DNA is "expressed" I iterate over each of the genes and render t
 4. After selecting which DNAs to reproduce, via crossover, select 50% of the genes from each parent, apply random mutations to generate children DNAs. The children now become the current population.
 5. Repeat form step 2.
 
-### Choice Renderings
+### Select Renderings & Stats
 
 Two versions of Bulbasaur partially evolved. Used sexual reproduction via two parents. Population used stochastic acceptance with elitism to generate next populations.
 
