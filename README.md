@@ -15,13 +15,13 @@ Draw Images via genetic programming.
 
 ### The Algorithms
 
-There are two algorithms used in Genetic Draw. Both algorithms demonstrate the use of Genetic Programing to evolve an image from a DNA. 
+There are two algorithms used in Genetic Draw. Both algorithms demonstrate the use of Genetic Programing to evolve an image from DNA(s). 
 
-The DNA is a list of Genes where each gene encodes a polygon. The polygon could be a square, circle, rectangle, ellipse, triangle, or N-vertex polygon. In addition each gene encodes the color, location (including z-index), transparency, and size of each polygon.
+The DNA is a list of genes where each gene encodes a polygon. The polygon could be a square, circle, rectangle, ellipse, triangle, or N-vertex polygon. In addition each gene encodes the color, location (including z-index), transparency, and size of each polygon.
 
-When a specific DNA is "expressed", this simply means that we iterate over each of the genes and render the polygon that they represent to an image. This occurs for each of the DNAs. The rendered image is then compared to a target image. The difference between the target image and the actual image is defined as the fitness of the DNA. In this example, 0 is perfect, meaning the evolved image is exactly the same as the target image. This is more accurately defined as the error function and works just as well. 
+When a specific DNA is "expressed" I iterate over each of the genes and render the encoded polygons to an image. I do this for each of the DNAs. The rendered image is then compared to a target image. The difference between the target image and the actual image is defined as the fitness of the DNA. In this program, 0 is perfect, meaning the evolved image is exactly the same as the target image. This is more accurately defined as the error function and works just as well.
 
-#### Single Parent Genetic Programming (![SingleParentGeneticDraw.kt](https://github.com/kennycason/genetic_draw/blob/master/src/main/java/com/kennycason/genetic/draw/SingleParentGeneticDraw.kt))
+#### Single Parent Genetic Programming ([SingleParentGeneticDraw.kt](https://github.com/kennycason/genetic_draw/blob/master/src/main/java/com/kennycason/genetic/draw/SingleParentGeneticDraw.kt))
 
 1. Randomly generate a parent DNA. 
 2. Make a clone of the parent DNA, randomly mutating some of it's genes. We'll call this the child DNA.
@@ -29,7 +29,7 @@ When a specific DNA is "expressed", this simply means that we iterate over each 
 4. If the child's DNA is more fit than it's parent's DNA, then set the parent to be the child. (The parent is now irrelevant.)
 5. Repeat form step 2.
 
-#### Population-Based Two Parent Genetic Programming (![PopulationBasedGeneticDraw.kt](https://github.com/kennycason/genetic_draw/blob/master/src/main/java/com/kennycason/genetic/draw/PopulationBasedGeneticDraw.kt))
+#### Population-Based Two Parent Genetic Programming ([PopulationBasedGeneticDraw.kt](https://github.com/kennycason/genetic_draw/blob/master/src/main/java/com/kennycason/genetic/draw/PopulationBasedGeneticDraw.kt))
 
 1. Randomly generate a population of DNAs.
 2. Measure the fitness of all of the DNAs and sort them by fitness.
