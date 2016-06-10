@@ -61,8 +61,9 @@ However, one of our Kirby's didn't evolve so well. But why? It turns out that I 
 
 Adding alpha channels to the polygons results in a considerable performance drop (about 7x). While adding alpha results in better results, there are options to remove the alpha channel. Below are two renderings, with alpha and without.
 
-<img src="output/jing_evolved.png?raw=true" width="300px"/>
-<img src="output/jing_evolved_no_alpha.png?raw=true" width="300px"/>
+<img src="output/jing_evolved_2500_genes.png?raw=true" width="250px"/>
+<img src="output/jing_evolved.png?raw=true" width="250px"/>
+<img src="output/jing_evolved_no_alpha.png?raw=true" width="250px"/>
 
 The canonical examples I found on the internet seem to be the evolution of Mona Lisa. Most examples I found demonstrated using triangles. I found that I had better results by mixing many shapes together. On the left is Mona Lisa evolved using rectangles and ellipses. Below, the first two evolutions demonstrate 1000 and 2000 genes containing only rectangles and ellipses, and the third using only triangles.
 
