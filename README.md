@@ -13,6 +13,34 @@ Draw Images via genetic programming.
 - Extendable Mutation/Selection classes
 - DNA can be comprised of many shapes, including polygons (Size N), squares, rectangles, ellipses, circles, and pixels.
 
+### The Algorithms
+
+There are two algorithms used in Genetic Draw. Both algorithms demonstrate the use of Genetic Programing to evolve an image from a DNA. 
+
+The DNA is a list of Genes where each gene encodes a polygon. The polygon could be a square, circle, rectangle, ellipse, triangle, or N-vertex polygon. In addition each gene encodes the color, location (including z-index), transparency, and size of each polygon.
+
+When a specific DNA is "expressed", this simply means that we iterate over each of the genes and render the polygon that they represent to an image. This occurs for each of the DNAs. The rendered image is then compared to a target image. The difference between the target image and the actual image is defined as the fitness of the DNA. In this example, 0 is perfect, meaning the evolved image is exactly the same as the target image. This is more accurately defined as the error function and works just as well. 
+
+#### Single Parent Genetic Programming (![SingleParentGeneticDraw.kt](https://github.com/kennycason/genetic_draw/blob/master/src/main/java/com/kennycason/genetic/draw/SingleParentGeneticDraw.kt))
+
+1. Randomly generate a parent DNA. 
+2. Make a clone of the parent DNA, randomly mutating some of it's genes. We'll call this the child DNA.
+3. Measure the fitness of the child DNA. This is done by drawing the polygons to an image and comparing it pixel-by-pixel to a target image.
+4. If the child's DNA is more fit than it's parent's DNA, then set the parent to be the child. (The parent is now irrelevant.)
+5. Repeat form step 2.
+
+#### Population-Based Two Parent Genetic Programming (![PopulationBasedGeneticDraw.kt](https://github.com/kennycason/genetic_draw/blob/master/src/main/java/com/kennycason/genetic/draw/PopulationBasedGeneticDraw.kt))
+
+1. Randomly generate a population of DNAs.
+2. Measure the fitness of all of the DNAs and sort them by fitness.
+3a. Optionally, allowing elitism, select the most fit to succeed to the next generation. 
+3b. Optionally, kill off the bottom x% (lowest fitness) of the population.
+3c. Using tournament selection or stochastic acceptance determine which remaining DNAs should reproduce to make the next generation of DNAs. Reproduce enough children to repopulate the next generation.
+4. After selecting which DNAs to reproduce, via crossover, select 50% of the genes from each parent, apply random mutations to generate children DNAs. The children now become the current population.
+5. Repeat form step 2.
+
+### Choice Renderings
+
 Two versions of Bulbasaur partially evolved. Used sexual reproduction via two parents. Population used stochastic acceptance with elitism to generate next populations.
 
 <img src="output/bulbasaur_evolved_polygon.png?raw=true"/>
@@ -59,7 +87,7 @@ However, one of our Kirby's didn't evolve so well. But why? It turns out that I 
 
 <img src="output/kirby_evolved_bad_fitness_function.png?raw=true" width="128px"/>
 
-Adding alpha channels to the polygons results in a considerable performance drop (about 7x). While adding alpha results in better results, there are options to remove the alpha channel. Below are two renderings, with alpha and without.
+Adding alpha channels to the polygons results in a considerable performance drop (about 7x). While adding alpha results in better results, there are options to remove the alpha channel. Below are three renderings, the first two use alpha (left 2500 genes, middle 2000 genes), and the right image demonstrates no transparency.
 
 <img src="output/jing_evolved_2500_genes.png?raw=true" width="250px"/>
 <img src="output/jing_evolved.png?raw=true" width="250px"/>
