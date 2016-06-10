@@ -43,8 +43,8 @@ When a specific DNA is "expressed" I iterate over each of the genes and render t
 
 Two versions of Bulbasaur partially evolved. Used sexual reproduction via two parents. Population used stochastic acceptance with elitism to generate next populations.
 
-<img src="output/bulbasaur_evolved_polygon.png?raw=true"/>
-<img src="output/bulbasaur_evolved_polygon2.png?raw=true"/>
+<img src="output/bulbasaur_evolved_polygon.png?raw=true" width="250px"/>
+<img src="output/bulbasaur_evolved_polygon2.png?raw=true" width="250px"/>
 
 Two GIFs showing the evolution of a square.
 
