@@ -1,7 +1,7 @@
 Genetic Draw
 ============
 
-Draw Images via genetic programming.
+Draw Images via genetic programming. [中文版](https://github.com/kennycason/genetic_draw/blob/master/README-ZH.md)
 
 ### The Algorithms
 
