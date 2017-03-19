@@ -17,7 +17,7 @@ When a specific DNA is "expressed" I iterate over each of the genes and render t
 2. Make a clone of the parent DNA, randomly mutating some of it's genes. We'll call this the child DNA.
 3. Measure the fitness of the child DNA. This is done by drawing the polygons to an image and comparing it pixel-by-pixel to a target image.
 4. If the child's DNA is more fit than it's parent's DNA, then set the parent to be the child. (The parent is now irrelevant.)
-5. Repeat form step 2.
+5. Repeat from step 2.
 
 #### Population-Based Two Parent Genetic Programming ([PopulationBasedGeneticDraw.kt](https://github.com/kennycason/genetic_draw/blob/master/src/main/java/com/kennycason/genetic/draw/PopulationBasedGeneticDraw.kt))
 
@@ -27,7 +27,7 @@ When a specific DNA is "expressed" I iterate over each of the genes and render t
 4. Optionally, kill off the bottom x% (lowest fitness) of the population.
 5. Using tournament selection or stochastic acceptance determine which remaining DNAs should reproduce to make the next generation of DNAs. Reproduce enough children to repopulate the next generation.
 6. After selecting which DNAs to reproduce, via crossover, select 50% of the genes from each parent, apply random mutations to generate children DNAs. The children now become the current population.
-7. Repeat form step 2.
+7. Repeat from step 2.
 
 ### Select Renderings & Stats
 
