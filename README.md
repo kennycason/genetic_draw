@@ -1,7 +1,7 @@
 Genetic Draw
 ============
 
-Draw Images via genetic programming. [中文版/Chinese](https://github.com/kennycason/genetic_draw/blob/master/README-ZH.md)
+Draw Images via genetic programming. [中文版/Chinese](https://github.com/kennycason/genetic_draw/blob/master/README-ZH.md) [日本語版/Japanese](https://github.com/kennycason/genetic_draw/blob/master/README-JA.md)
 
 ### The Algorithms
 
@@ -76,8 +76,6 @@ Our good friend Kirby, evolved using both pixel and polygon rendering DNAs.
 <img src="output/kirby_evolved_pixel4.png?raw=true" height="128px"/> <img src="output/kirby_evolved_polygon.png?raw=true" height="128px"/> <img src="output/kirby_evolved_bad_fitness_function.png?raw=true" width="120px"/>
 
 However, one of our Kirby's didn't evolve so well. But why? It turns out that I had a bad fitness function. Specifically my fitness function compared the raw difference between raw RGB integer values between the evolved and target images. That is red is encoded in higher bits than green, and green higher than blue. This means that a difference between reds is significantly larger than differences between greens or blue and thus the genetic algorithm will perceive improvements of red being more important than blue. In other words, I introduced a bias in the fitness function. The result was random blue blotches in many of the renderings.
-
-<img src="output/kirby_evolved_bad_fitness_function.png?raw=true" width="128px"/>
 
 More of the statistics and graphs can be found in an excel file [here](convergence_stats.xlsx?raw=true).
 
