@@ -55,7 +55,7 @@ Adding alpha channels to the polygons results in a considerable performance drop
 
 <img src="output/jing_evolved_2500_genes.png?raw=true" width="250px"/> <img src="output/jing_evolved.png?raw=true" width="250px"/> <img src="output/jing_evolved_no_alpha.png?raw=true" width="250px"/>
 
-The canonical examples I found on the internet seem to be the evolution of Mona Lisa. Most examples I found demonstrated using triangles. I found that I had better results by mixing many shapes together. On the left is Mona Lisa evolved using rectangles and ellipses. Below, the first two evolutions demonstrate 1000 and 2000 genes containing only rectangles and ellipses, and the third using only triangles.
+The canonical examples I found on the internet seem to be the evolution of Mona Lisa. The most interesting example I found was by Roger Johansson found [here](https://rogerjohansson.blog/2008/12/07/genetic-programming-evolution-of-mona-lisa/). Most examples I found demonstrated using triangles. I found that I had better results by mixing many shapes together. On the left is Mona Lisa evolved using rectangles and ellipses. Below, the first two evolutions demonstrate 1000 and 2000 genes containing only rectangles and ellipses, and the third using only triangles.
 
 <img src="output/mona_lisa_evolved_1000_genes.png?raw=true" width="250px"/> <img src="output/mona_lisa_evolved_2000_genes.png?raw=true" width="250px"/> <img src="output/mona_lisa_evolved_polygon.png?raw=true" width="250px"/>
 
